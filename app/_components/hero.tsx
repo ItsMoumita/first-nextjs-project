@@ -1,16 +1,38 @@
 "use client";
-import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css/pagination";
 import "swiper/css";
+import Image from "next/image";
+import { getCategoryList } from "@/lib/categories/list";
+
+/**
+ *
+ * URL = BASE_URL, VERSION, PREFIX, API_URL
+ * CONFIGURATION = POST/GET/PUT, JSON/XML/HTML
+ * BODY = JSON, FORM-DATA
+ * RESPONSE =
+ * REUSABILITY = ??
+ *
+ */
 
 export default function Hero() {
+  async function Category() {
+    try {
+      const res = await getCategoryList();
+      console.log(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  Category();
   return (
     <div className="p-4">
       <div className="h-[70vh] w-full relative overflow-hidden rounded-xl ">
-        <img
+        <Image
           src="/assets/banner.jpg"
           className="h-full w-full object-cover "
+          width={1200}
+          height={1200}
           alt="banner"
         />
         <div className="absolute  w-full h-full inset-0 rounded-xl  bg-[rgba(0,0,0,0.4)] z-1 "></div>
