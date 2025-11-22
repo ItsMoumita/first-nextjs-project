@@ -4,6 +4,7 @@ import "swiper/css/pagination";
 import "swiper/css";
 import Image from "next/image";
 import { getCategoryList } from "@/lib/categories/list";
+import { useState } from "react";
 
 /**
  *
@@ -14,12 +15,18 @@ import { getCategoryList } from "@/lib/categories/list";
  * REUSABILITY = ??
  *
  */
+type category_type = {
+  name: string;
+};
 
 export default function Hero() {
+  const [categories, setCategories] = useState<category_type[] | null>(null);
+
   async function Category() {
     try {
       const res = await getCategoryList();
-      console.log(res.data);
+      setCategories(res.data);
+      console.log(categories);
     } catch (error) {
       console.log(error);
     }
@@ -63,7 +70,9 @@ export default function Hero() {
             className="mySwiper h-[72px]"
           >
             <SwiperSlide className="bg-[rgb(255,254,254,0.3)] p-4 rounded-lg text-center max-w-[250px] text-white font-lg font-semibold hover:bg-[rgb(255,254,254,0.8)] hover:text-black ">
-              Perfume
+              {categories?.map((category: category_type, index) => (
+                <p key={index}>{category?.name}</p>
+              ))}
             </SwiperSlide>
             <SwiperSlide className="bg-[rgb(255,254,254,0.3)] p-4 rounded-lg text-center max-w-[250px] text-white font-lg font-semibold hover:bg-[rgb(255,254,254,0.8)] hover:text-black ">
               Kitchen
