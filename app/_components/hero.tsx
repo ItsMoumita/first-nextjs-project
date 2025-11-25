@@ -15,13 +15,14 @@ import { useState } from "react";
  * REUSABILITY = ??
  *
  */
-// type category_type = {
-//   name: string;
-// };
+type category_type = {
+  name: string;
+  slug: string;
+};
 
 
 export default function Hero() {
-  const [categories, setCategories] = useState<string[] | null>(null);
+  const [categories, setCategories] = useState<category_type[] | null>(null);
 
   async function Category() {
     try {
@@ -71,10 +72,10 @@ export default function Hero() {
             className="mySwiper h-[72px]"
           >
             
-              {categories?.map((category: string, index) => (
+              {categories?.map((category: category_type, index) => (
                 <>
                 <SwiperSlide className="bg-[rgb(255,254,254,0.3)] p-4 rounded-lg text-center max-w-[250px] text-white font-lg font-semibold hover:bg-[rgb(255,254,254,0.8)] hover:text-black ">
-                <p key={index}>{category}</p>
+                <p key={category?.slug}>{category?.name}</p>
                   </SwiperSlide>
                 </>
               ))}
