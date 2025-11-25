@@ -5,6 +5,7 @@ import "swiper/css";
 import Image from "next/image";
 import { getCategoryList } from "@/lib/categories/list";
 import { useState } from "react";
+import { Autoplay } from "swiper/modules";
 
 /**
  *
@@ -62,13 +63,13 @@ export default function Hero() {
         {/* banner Carousel  */}
         <div className="absolute bottom-5 left-0 w-full z-10 ">
           <Swiper
-            slidesPerView={6}
-            centeredSlides={false}
-            spaceBetween={20}
-            grabCursor={true}
-            pagination={{
-              clickable: true,
-            }}
+            spaceBetween={10}
+						slidesPerView={"auto"}
+						autoplay={{
+							delay: 2000,
+							disableOnInteraction: false,
+						}}
+						modules={[Autoplay]}
             className="mySwiper h-[72px]"
           >
             
