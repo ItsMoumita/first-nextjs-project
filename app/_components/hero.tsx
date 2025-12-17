@@ -29,7 +29,7 @@ export default function Hero() {
     try {
       const res = await getCategoryList();
       setCategories(res.data);
-      console.log(categories);
+      // console.log(categories);
     } catch (error) {
       console.log(error);
     }
@@ -74,11 +74,11 @@ export default function Hero() {
           >
             
               {categories?.map((category: category_type, index) => (
-                <>
-                <SwiperSlide className="bg-[rgb(255,254,254,0.3)] p-4 rounded-lg text-center max-w-[250px] text-white font-lg font-semibold hover:bg-[rgb(255,254,254,0.8)] hover:text-black ">
-                <p key={category?.slug}>{category?.name}</p>
+              
+                <SwiperSlide key={category?.slug || index} className="bg-[rgb(255,254,254,0.3)] p-4 rounded-lg text-center max-w-[250px] text-white font-lg font-semibold hover:bg-[rgb(255,254,254,0.8)] hover:text-black ">
+                {category?.name}
                   </SwiperSlide>
-                </>
+              
               ))}
           </Swiper>
         </div>

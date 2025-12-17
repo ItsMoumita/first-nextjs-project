@@ -1,7 +1,8 @@
 import instance from "../instance";
 
-const getProductsList = async () => {
-  return await instance.get("/products/all");
+const getProducts = async () => {
+  return await instance.get("/products");
+
 };
 
-export { getProductsList };
+export { getProducts};
