@@ -1,4 +1,6 @@
 "use client";
+import { Card, CardContent, CardDescription, CardFooter, CardTitle } from '@/components/ui/card';
+import { RatingStars } from '@/components/ui/RatingStars';
 import { getProducts } from '@/lib/products/list';
 import { useEffect, useState } from 'react';
 import { BiCategory } from 'react-icons/bi';
@@ -11,6 +13,11 @@ type products_type = {
    title: string;
    category: string;
    description: string;
+   stock: number;
+   brand: string;
+   images: string[];
+    price: number;
+    rating: number;
 }
 
 
@@ -34,16 +41,41 @@ export default function Products ()  {
 
     },[]);
 
-//  console.log(allproducts);
+ console.log(allproducts);
 
    const categories = [...new Set(allproducts?.map(product => product.category))]; 
 
-console.log(categories);
+// console.log(categories);
     return (
         <div>
           {categories.map(category => (
             <div key={category} className="">
-               
+               <h1 className='text-3xl font-bold m-5'>{category}</h1>
+
+               <div className="grid grid-cols-4 gap-4">
+                {allproducts.filter(product => product.category === category).map(filteredProduct => (
+                <div key={filteredProduct.id} className="">
+                       <Card className='border-gray-300 p-4'>
+                        <CardContent className='p-12 shadow-lg rounded-lg '>
+
+                        <img className='border-gray-300' src={filteredProduct.images[0]}></img>
+                        </CardContent>
+
+                        <CardFooter className='flex flex-col items-start p-5 shadow-lg rounded-lg '>
+                           <CardTitle>{filteredProduct.title}</CardTitle>
+                           <CardDescription className='flex justify-between gap-2'>
+                            <span>{filteredProduct.brand}</span>
+                            <span>•{filteredProduct.stock} items available</span>
+                           </CardDescription>
+                           <CardDescription className='flex justify-between gap-2'>
+                            <CardTitle className='text-black'>${filteredProduct.price}</CardTitle>
+                            <RatingStars rating={filteredProduct.rating} />
+                           </CardDescription>
+                        </CardFooter>
+                       </Card>
+                  </div>
+               ))}
+               </div>
             </div>
           ))}
         </div>
