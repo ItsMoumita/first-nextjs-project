@@ -2,6 +2,7 @@
 import { Card, CardContent, CardDescription, CardFooter, CardTitle } from '@/components/ui/card';
 import { RatingStars } from '@/components/ui/RatingStars';
 import { getProducts } from '@/lib/products/list';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { BiCategory } from 'react-icons/bi';
 
@@ -41,7 +42,7 @@ export default function Products ()  {
 
     },[]);
 
- console.log(allproducts);
+//  console.log(allproducts);
 
    const categories = [...new Set(allproducts?.map(product => product.category))]; 
 
@@ -50,11 +51,13 @@ export default function Products ()  {
         <div>
           {categories.map(category => (
             <div key={category} className="">
-               <h1 className='text-3xl font-bold m-5'>{category}</h1>
-
-               <div className="grid grid-cols-4 gap-4">
+               <h1 className='text-3xl font-bold mt-5'>{category}</h1>
+               <p className='text-xl font-bold  text-gray-400'>{category.length} Products Found</p>
+                  
+               <div className="grid grid-cols-4 gap-4 mt-12 mb-18">
                 {allproducts.filter(product => product.category === category).map(filteredProduct => (
-                <div key={filteredProduct.id} className="">
+                <Link key={filteredProduct.id} href={`/products/${filteredProduct.id}`}>
+                  <div key={filteredProduct.id} className="">
                        <Card className='border-gray-300 p-4'>
                         <CardContent className='p-12 shadow-lg rounded-lg '>
 
@@ -74,6 +77,7 @@ export default function Products ()  {
                         </CardFooter>
                        </Card>
                   </div>
+                  </Link>
                ))}
                </div>
             </div>
