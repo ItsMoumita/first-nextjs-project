@@ -4,4 +4,7 @@ const getCategoryList = async () => {
   return await instance.get("/products/categories");
 };
 
-export { getCategoryList };
+const getProductById = async (id: string) => {
+  return await instance.get(`https://dummyjson.com/products/${id}`)
+}
+export { getCategoryList,  getProductById};
