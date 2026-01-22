@@ -6,6 +6,12 @@ import React, { useEffect, useState } from 'react'
  type details_type = {
   images: string[];
   brand: string;
+  title: string;
+  availabilityStatus: string;
+  description: string;
+  price: number;
+  discountPercentage: number;
+  stock: number;
 }
 
 export default function ProductDetails() {
@@ -36,11 +42,22 @@ export default function ProductDetails() {
     console.log(productDetails);
   return (
     <div className='flex flex-col md:flex-row min-h-[700px] py-2'>
-      <div className="max-w-1/3">
-         <img src={productDetails?.images?.[0]} alt="" />
+      <div className="max-w-2/5 ">
+         <img className='w-ful h-[400px] border-2 border-gray-300 rounded-lg p-4 m-4' src={productDetails?.images?.[0]} alt="" />
       </div>
-      <div className="max-w-2/3">
-           <h1>{productDetails?.brand}</h1>
+      <div className="m-4 py-5 px-5 space-y-4 items-center">
+           <h1 className='text-gray-500 text-xl font-semibold'>{productDetails?.brand}</h1>
+           <div className="flex items-center space-x-4">
+            <h1 className='text-3xl md:text-4xl font-semibold'>{productDetails?.title}</h1>
+            <span className= 'text-sm px-2 text-green-400 bg-green-100 border border-green-400 rounded font-semibold'>{productDetails?.availabilityStatus}</span>
+           </div>
+           <p className='max-w-[40%] font-medium'>{productDetails?.description}</p>
+           <div className="flex gap-5 items-center">
+            <h1 className='text-3xl md:text-4xl font-bold'>${productDetails?.price}</h1>
+            <p className= ' text-white bg-red-700/70 font-semibold px-4 py-2 h-10 rounded-3xl'>{productDetails?.discountPercentage}% Off</p>
+           </div>
+           <p className='text-lg font-medium'>Quantity <span className='text-gray-400'>({productDetails?.stock} items available)</span></p>
+         
       </div>
     </div>
   )
