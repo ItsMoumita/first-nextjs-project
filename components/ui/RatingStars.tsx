@@ -1,7 +1,11 @@
 import { FaStar, FaRegStar } from "react-icons/fa";
 import { FaRegStarHalfStroke } from "react-icons/fa6";
 
- export const RatingStars = ({rating}) => {
+type RatingStarsProps = {
+    rating: number;
+}
+
+ export const RatingStars = ({rating}: RatingStarsProps) => {
       const full = Math.floor(rating);
       const half = rating % 1 !== 0;
       const empty = 5 - full - (half ? 1 : 0);
