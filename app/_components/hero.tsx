@@ -4,7 +4,7 @@ import "swiper/css/pagination";
 import "swiper/css";
 import Image from "next/image";
 import { getCategoryList } from "@/lib/categories/list";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Autoplay } from "swiper/modules";
 
 /**
@@ -25,16 +25,21 @@ type category_type = {
 export default function Hero() {
   const [categories, setCategories] = useState<category_type[] | null>(null);
 
-  async function Category() {
-    try {
-      const res = await getCategoryList();
-      setCategories(res.data);
-      // console.log(categories);
-    } catch (error) {
-      console.log(error);
+
+  useEffect(() => {
+    async function fetchCategories() {
+      try {
+        const res = await getCategoryList();
+        setCategories(res.data);
+      } catch (error) {
+        console.log(error);
+      }
     }
-  }
-  Category();
+
+    fetchCategories();
+  }, []); 
+
+
   return (
     <div className="p-4">
       <div className="h-[70vh] w-full relative overflow-hidden rounded-xl ">
